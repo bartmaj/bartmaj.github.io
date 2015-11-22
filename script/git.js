@@ -11,11 +11,15 @@ jQuery.fn.loadRepositories = function(username) {
         sortByName(repos);    
      
         var list = $('<dl/>');
+		var counter = 1;
+		var noDisplayList = ['GamePlay','paradox', 'dive-into-machine-learning'];
         target.empty().append(list);
         $(repos).each(function() {
-            if (this.name != (username.toLowerCase()+'.github.com')) {
-                list.append('<dt><a href="'+ (this.homepage?this.homepage:this.html_url) +'">' + this.name + '</a> <em>'+(this.language?('('+this.language+')'):'')+'</em></dt>');
+            if (this.name != (username.toLowerCase()+'.github.com')
+					&& $.inArray(this.name, noDisplayList) == -1) {
+                list.append('<dt>' + counter+ '. <a href="'+ (this.homepage?this.homepage:this.html_url) +'">'+ this.name + '</a> <em>'+(this.language?('('+this.language+')'):'')+'</em></dt>');
                 list.append('<dd>' + this.description +'</dd>');
+			counter++;
             }
         });      
       });
