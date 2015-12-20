@@ -10,6 +10,10 @@ $(function () {
 	});
 });
 
-
-
-
+$('.navbar-nav a').click(function(){
+    var url=$(this).attr('href');
+    $('.load').load(url);
+    $('.active').removeClass('active');
+    $(this).parent().addClass('active');
+    return false;
+});
